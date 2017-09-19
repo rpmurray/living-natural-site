@@ -1319,7 +1319,7 @@ a:hover .nav-title,
 }
 
 .navigation-top .wrap {
-	max-width: 1000px;
+	max-width: 1200px;
 	padding: 0;
 }
 
@@ -1528,7 +1528,7 @@ body {
 .wrap {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 700px;
+	max-width: 1200px;
 	padding-left: 2em;
 	padding-right: 2em;
 }
@@ -2084,7 +2084,7 @@ body:not(.twentyseventeen-front-page) .entry-header {
 .archive.page-one-column:not(.has-sidebar) #primary {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 740px;
+	max-width: 90%;
 }
 
 .single-featured-image-header {
@@ -3248,7 +3248,7 @@ object {
 	}
 
 	.page-one-column .panel-content .wrap {
-		max-width: 740px;
+		max-width: 90%;
 	}
 
 	.panel-content .entry-header {
@@ -3324,9 +3324,9 @@ object {
 	/* Layout */
 
 	.wrap {
-		max-width: 1000px;
-		padding-left: 3em;
-		padding-right: 3em;
+		max-width: 1200px;
+		padding-left: 2em;
+		padding-right: 2em;
 	}
 
 	.has-sidebar:not(.error404) #primary {
@@ -3433,7 +3433,7 @@ object {
 	}
 
 	.navigation-top .wrap {
-		max-width: 1000px;
+		max-width: 1200px;
 		/* The font size is 14px here and we need 50px padding in ems */
 		padding: 0.75em 3.4166666666667em;
 	}
