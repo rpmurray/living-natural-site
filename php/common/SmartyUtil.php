@@ -6,8 +6,7 @@
  */
 namespace common;
 
-require_once 'common.php';
-require_once(SMARTY_DIR . 'Smarty.class.php');
+require_once(Config::SMARTY_DIR . '/Smarty.class.php');
 
 /**
  *
@@ -24,10 +23,10 @@ class SmartyUtil {
         $this->smarty = new \Smarty();
 
         // configure
-        $this->smarty->setTemplateDir(PHP_DIR . $module . '/view/templates/');
-        $this->smarty->setCompileDir(SMARTY_COMPILE_DIR);
-        $this->smarty->setConfigDir(SMARTY_CONFIGS_DIR);
-        $this->smarty->setCacheDir(SMARTY_CACHE_DIR);
+        $this->smarty->setTemplateDir(Config::PHP_DIR . $module . '/view/templates/');
+        $this->smarty->setCompileDir(Config::SMARTY_COMPILE_DIR);
+        $this->smarty->setConfigDir(Config::SMARTY_CONFIGS_DIR);
+        $this->smarty->setCacheDir(Config::SMARTY_CACHE_DIR);
 
         // define common properties
         $this->smarty->assign('_css', '../css');

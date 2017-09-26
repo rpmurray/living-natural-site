@@ -5,9 +5,8 @@
  * Time: 12:25 PM
  */
 
-namespace calendar;
+namespace calendar\view;
 
-require_once 'common.php';
 use common\SmartyUtil;
 
 /**

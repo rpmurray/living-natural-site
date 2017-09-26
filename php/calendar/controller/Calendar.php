@@ -4,9 +4,9 @@
  * Date: 9/24/2017
  * Time: 11:49 AM
  */
-namespace calendar;
+namespace calendar\controller;
 
-require_once 'common.php';
+use calendar\view\CalendarBuilder;
 
 /**
  *
