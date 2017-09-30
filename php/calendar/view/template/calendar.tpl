@@ -34,6 +34,9 @@
                 <div id="calendar" class="fc-calendar-container"></div>
             </div>
         </div><!-- /container -->
+        <div><!-- php debug -->
+            {$phpdebug}
+        </div>
         <script type="text/javascript" src="{$_js}/jquery.min.js"></script>
         <script type="text/javascript" src="{$_js}/jquery.calendario.js"></script>
         <script type="text/javascript" src="{$_js}/data.js"></script>

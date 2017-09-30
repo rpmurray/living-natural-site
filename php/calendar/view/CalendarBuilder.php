@@ -17,7 +17,13 @@ class CalendarBuilder {
      *
      */
     public function build() {
+        // setup
         $smarty = new SmartyUtil('calendar');
+
+        // do some stuff
+
+
+        // render
         $smarty->render('calendar.tpl');
     }
 }

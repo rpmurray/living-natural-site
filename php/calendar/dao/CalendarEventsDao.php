@@ -8,7 +8,7 @@ namespace calendar\dao;
 
 use calendar\model\CalendarEvent;
 use common\Dao;
-use common\types\UID;
+use common\types\Uid;
 
 /**
  *
@@ -22,11 +22,11 @@ class CalendarEventsDao extends Dao {
     }
 
     /**
-     * @param UID $uid
+     * @param Uid $uid
      *
      * @return \PDOStatement
      */
-    public function fetchByUid(UID $uid) {
+    public function fetchByUid(Uid $uid) {
         $bv = array(':uid' => $uid->get());
         $sql = "select * from calendar_events where uid = :uid";
         $sth = $this->execute($sql, $bv);
@@ -35,11 +35,11 @@ class CalendarEventsDao extends Dao {
     }
 
     /**
-     * @param UID $calendarUid
+     * @param Uid $calendarUid
      *
      * @return \PDOStatement
      */
-    public function fetchByCalendarUid(UID $calendarUid) {
+    public function fetchByCalendarUid(Uid $calendarUid) {
         $bv = array(':calendar_uid' => $calendarUid->get());
         $sql = "select * from calendar_events where calendar_uid = :calendar_uid";
         $sth = $this->execute($sql, $bv);

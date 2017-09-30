@@ -119,7 +119,7 @@ define('EBML_ID_TARGETTYPE',                    0x23CA); //         [63][CA] -- 
 define('EBML_ID_TRACKTRANSLATE',                0x2624); //         [66][24] -- The track identification for the given Chapter Codec.
 define('EBML_ID_TRACKTRANSLATETRACKID',         0x26A5); //         [66][A5] -- The binary value used to represent this track in the chapter codec data. The format depends on the ChapProcessCodecID used.
 define('EBML_ID_TRACKTRANSLATECODEC',           0x26BF); //         [66][BF] -- The chapter codec using this ID (0: Matroska Script, 1: DVD-menu).
-define('EBML_ID_TRACKTRANSLATEEDITIONUID',      0x26FC); //         [66][FC] -- Specify an edition UID on which this translation applies. When not specified, it means for all editions found in the segment.
+define('EBML_ID_TRACKTRANSLATEEDITIONUID',      0x26FC); //         [66][FC] -- Specify an edition Uid on which this translation applies. When not specified, it means for all editions found in the segment.
 define('EBML_ID_SIMPLETAG',                     0x27C8); //         [67][C8] -- Contains general information about the target.
 define('EBML_ID_TARGETTYPEVALUE',               0x28CA); //         [68][CA] -- A number to indicate the logical level of the target (see TargetType).
 define('EBML_ID_CHAPPROCESSCOMMAND',            0x2911); //         [69][11] -- Contains all the commands associated to the Atom.
@@ -130,7 +130,7 @@ define('EBML_ID_CHAPPROCESS',                   0x2944); //         [69][44] -- 
 define('EBML_ID_CHAPPROCESSCODECID',            0x2955); //         [69][55] -- Contains the type of the codec used for the processing. A value of 0 means native Matroska processing (to be defined), a value of 1 means the DVD command set is used. More codec IDs can be added later.
 define('EBML_ID_CHAPTERTRANSLATEID',            0x29A5); //         [69][A5] -- The binary value used to represent this segment in the chapter codec data. The format depends on the ChapProcessCodecID used.
 define('EBML_ID_CHAPTERTRANSLATECODEC',         0x29BF); //         [69][BF] -- The chapter codec using this ID (0: Matroska Script, 1: DVD-menu).
-define('EBML_ID_CHAPTERTRANSLATEEDITIONUID',    0x29FC); //         [69][FC] -- Specify an edition UID on which this correspondance applies. When not specified, it means for all editions found in the segment.
+define('EBML_ID_CHAPTERTRANSLATEEDITIONUID',    0x29FC); //         [69][FC] -- Specify an edition Uid on which this correspondance applies. When not specified, it means for all editions found in the segment.
 define('EBML_ID_CONTENTENCODINGS',              0x2D80); //         [6D][80] -- Settings for several content encoding mechanisms like compression or encryption.
 define('EBML_ID_MINCACHE',                      0x2DE7); //         [6D][E7] -- The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used.
 define('EBML_ID_MAXCACHE',                      0x2DF8); //         [6D][F8] -- The maximum cache size required to store referenced frames in and the current frame. 0 means no cache is needed.
@@ -142,7 +142,7 @@ define('EBML_ID_SEGMENTFILENAME',               0x3384); //         [73][84] -- 
 define('EBML_ID_SEGMENTUID',                    0x33A4); //         [73][A4] -- A randomly generated unique ID to identify the current segment between many others (128 bits).
 define('EBML_ID_CHAPTERUID',                    0x33C4); //         [73][C4] -- A unique ID to identify the Chapter.
 define('EBML_ID_TRACKUID',                      0x33C5); //         [73][C5] -- A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file.
-define('EBML_ID_ATTACHMENTLINK',                0x3446); //         [74][46] -- The UID of an attachment that is used by this codec.
+define('EBML_ID_ATTACHMENTLINK',                0x3446); //         [74][46] -- The Uid of an attachment that is used by this codec.
 define('EBML_ID_CLUSTERBLOCKADDITIONS',         0x35A1); //         [75][A1] -- Contain additional blocks to complete the main one. An EBML parser that has no knowledge of the Block structure could still see and use/skip these data.
 define('EBML_ID_CHANNELPOSITIONS',              0x347B); //         [7D][7B] -- Table of horizontal angles for each successive channel, see appendix.
 define('EBML_ID_OUTPUTSAMPLINGFREQUENCY',       0x38B5); //         [78][B5] -- Real output sampling frequency in Hz (used for SBR techniques).
@@ -152,7 +152,7 @@ define('EBML_ID_TRACKTYPE',                       0x03); //             [83] -- 
 define('EBML_ID_CHAPSTRING',                      0x05); //             [85] -- Contains the string to use as the chapter atom.
 define('EBML_ID_CODECID',                         0x06); //             [86] -- An ID corresponding to the codec, see the codec page for more info.
 define('EBML_ID_FLAGDEFAULT',                     0x08); //             [88] -- Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference.
-define('EBML_ID_CHAPTERTRACKNUMBER',              0x09); //             [89] -- UID of the Track to apply this chapter too. In the absense of a control track, choosing this chapter will select the listed Tracks and deselect unlisted tracks. Absense of this element indicates that the Chapter should be applied to any currently used Tracks.
+define('EBML_ID_CHAPTERTRACKNUMBER',              0x09); //             [89] -- Uid of the Track to apply this chapter too. In the absense of a control track, choosing this chapter will select the listed Tracks and deselect unlisted tracks. Absense of this element indicates that the Chapter should be applied to any currently used Tracks.
 define('EBML_ID_CLUSTERSLICES',                   0x0E); //             [8E] -- Contains slices description.
 define('EBML_ID_CHAPTERTRACK',                    0x0F); //             [8F] -- List of tracks on which the chapter applies. If this element is not present, all tracks apply
 define('EBML_ID_CHAPTERTIMESTART',                0x11); //             [91] -- Timecode of the start of Chapter (not scaled).

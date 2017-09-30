@@ -10,7 +10,7 @@ namespace common\types;
 /**
  *
  */
-class UID {
+class Uid {
     /** @var string */
     private $value;
 
@@ -26,9 +26,9 @@ class UID {
     }
 
     /**
-     * @return UID
+     * @return Uid
      */
     public static function generate() {
-        return new UID(uniqid());
+        return new Uid(uniqid());
     }
 }

@@ -9,15 +9,15 @@ namespace calendar\model;
 
 use common\Dates;
 use common\types\Timestamp;
-use common\types\UID;
+use common\types\Uid;
 
 /**
  *
  */
 class CalendarEvent {
-    /** @var UID */
+    /** @var Uid */
     private $uid;
-    /** @var UID */
+    /** @var Uid */
     private $calendarUid;
     /** @var string */
     private $title;
@@ -33,16 +33,16 @@ class CalendarEvent {
     private $updated;
 
     /**
-     * @param UID $uid
-     * @param UID $calendarUid
-     * @param string $title
-     * @param string $description
+     * @param Uid       $uid
+     * @param Uid       $calendarUid
+     * @param string    $title
+     * @param string    $description
      * @param Timestamp $date
-     * @param int $duration
+     * @param int       $duration
      * @param Timestamp $created
      * @param Timestamp $updated
      */
-    public function __construct(UID $uid, UID $calendarUid, $title, $description,
+    public function __construct(Uid $uid, Uid $calendarUid, $title, $description,
                                 Timestamp $date, $duration, Timestamp $created, Timestamp $updated) {
         // populate
         $this->uid = $uid;
@@ -62,20 +62,20 @@ class CalendarEvent {
      *
      */
     private function init() {
-        $this->uid = empty($this->uid) ? UID::generate() : $this->uid;
+        $this->uid = empty($this->uid) ? Uid::generate() : $this->uid;
         $this->created = empty($this->created) ? dates::now() : $this->created;
         $this->updated = empty($this->updated) ? dates::now() : $this->updated;
     }
 
     /**
-     * @return UID
+     * @return Uid
      */
     public function getUid() {
         return $this->uid;
     }
 
     /**
-     * @return UID
+     * @return Uid
      */
     public function getCalendarUid() {
         return $this->calendarUid;

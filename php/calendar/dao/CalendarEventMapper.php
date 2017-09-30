@@ -8,7 +8,7 @@
 namespace calendar\dao;
 use calendar\model\CalendarEvent;
 use common\types\Timestamp;
-use common\types\UID;
+use common\types\Uid;
 
 /**
  *
@@ -16,8 +16,8 @@ use common\types\UID;
 class CalendarEventMapper {
     public static function map($result) {
         $calendarEvent = new CalendarEvent(
-            new UID($result['uid']),
-            new UID($result['calendarUid']),
+            new Uid($result['uid']),
+            new Uid($result['calendarUid']),
             $result['title'],
             $result['description'],
             new Timestamp($result['date']),

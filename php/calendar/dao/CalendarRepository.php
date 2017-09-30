@@ -6,7 +6,7 @@
  */
 
 namespace calendar\dao;
-use common\types\UID;
+use common\types\Uid;
 use calendar\model\CalendarEvent;
 
 /**
@@ -20,11 +20,11 @@ class CalendarRepository {
     }
 
     /**
-     * @param UID $uid
+     * @param Uid $uid
      *
      * @return CalendarEvent
      */
-    public function byUid(UID $uid) {
+    public function byUid(Uid $uid) {
         $sth = $this->dao->fetchByUid($uid);
         $calendarEvent = CalendarEventMapper::map($sth->fetch(\PDO::FETCH_ASSOC));
 
@@ -32,11 +32,11 @@ class CalendarRepository {
     }
 
     /**
-     * @param UID $calendarUid
+     * @param Uid $calendarUid
      *
      * @return CalendarEvent[]
      */
-    public function byCalendarUid(UID $calendarUid) {
+    public function byCalendarUid(Uid $calendarUid) {
         $sth = $this->dao->fetchByCalendarUid($calendarUid);
         $count = $sth->rowCount();
         $calendarEvents = array();
