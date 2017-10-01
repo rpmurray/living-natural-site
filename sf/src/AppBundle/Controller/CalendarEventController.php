@@ -1,13 +1,10 @@
 <?php
 namespace AppBundle\Controller;
 
-require_once 'wp/wp-includes/user.php';
-
 use AppBundle\Entity\CalendarEvent;
 use AppBundle\Entity\User;
 use AppBundle\Util\Constants;
 use AppBundle\Util\Dates;
-use Monolog\Logger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

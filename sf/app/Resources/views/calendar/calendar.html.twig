@@ -19,17 +19,28 @@
             <div id="calendar" class="fc-calendar-container"></div>
         </div>
     </div>
+
+    <div class="modal fade" id="lab-slide-bottom-popup" data-keyboard="false" data-backdrop="false">
+        <div class="lab-modal-body">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <div id="calendar-day-details-content"></div>
+        </div>
+        <!-- /.modal-body -->
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.calendario.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/calendar.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/content.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/calendar.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/calendar-modal.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/page.css') }}"/>
 {% endblock %}
