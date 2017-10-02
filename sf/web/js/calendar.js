@@ -3,22 +3,27 @@ $(function () {
     $.ajax({
         url: '/calendar/events',
         method: "GET",
-        data: {},
+        data: {calendarUid: '59cac9581c590'},
         dataType: "json",
         success: eventsFetchSuccess
     });
 
     var cal, $month, $year, calEventDetails = {};
 
-    $('#custom-next').on('click', function () {
+    $('#custom-next').click(function () {
         cal.gotoNextMonth(updateMonthYear);
     });
-    $('#custom-prev').on('click', function () {
+    $('#custom-prev').click(function () {
         cal.gotoPreviousMonth(updateMonthYear);
     });
-    $('#custom-current').on('click', function () {
+    $('#custom-current').click(function () {
         cal.gotoNow(updateMonthYear);
     });
+    //if ($('#custom-add').length !== 0) {
+    //    $('#custom-add').click(function() {
+    //        showAddForm();
+    //    });
+    //}
 
     function updateMonthYear() {
         $month.html(cal.getMonthName());
@@ -118,6 +123,46 @@ $(function () {
         //$('#lab-slide-bottom-popup').modal('show');
     }, 5000); // optional - automatically opens in xxxx milliseconds
 });
+
+function showAddForm() {
+    $.ajax({
+        url: '/calendar/event',
+        method: "GET",
+        data: {},
+        dataType: "html",
+        success: eventFormFetchSuccess
+    });
+}
+
+function eventFormFetchSuccess(data, status, jqXHR) {
+    // set html content
+    $('#calendar-day-details-content').html(data);
+
+    // show modal
+    $('#lab-slide-bottom-popup').modal('show');
+}
+
+function postForm( $form, callback ){
+  /*
+   * Get all form values
+   */
+  var values = {};
+  $.each($form.serializeArray(), function(i, field) {
+    values[field.name] = field.value;
+  });
+
+  /*
+   * Throw the form values to the server!
+   */
+  $.ajax({
+    type        : $form.attr('method'),
+    url         : $form.attr('action'),
+    data        : values,
+    success     : function(data) {
+      callback(data);
+    }
+  });
+}
 
 var calendarEvents = {
     '11-21-2017': '<a href="http://www.wincalendar.com/Great-American-Smokeout">Great American Smokeout</a>',

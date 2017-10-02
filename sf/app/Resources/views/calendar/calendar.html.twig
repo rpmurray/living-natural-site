@@ -9,6 +9,13 @@
                     <span id="custom-year" class="custom-year"></span>
                 </h2>
                 <h3 class="custom-month-year">
+                    {% if isEditor == true %}
+                    <div id="add-content">
+                        <nav>
+                            <span id="custom-add" class="custom-add" title="Add event" onclick="showAddForm();"></span>
+                        </nav>
+                    </div>
+                    {% endif %}
                     <nav>
                         <span id="custom-prev" class="custom-prev"></span>
                         <span id="custom-next" class="custom-next"></span>

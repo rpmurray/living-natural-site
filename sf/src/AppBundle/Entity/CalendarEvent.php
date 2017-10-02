@@ -9,6 +9,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Util\Dates;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CalendarEvent {
     /**
+     * @var string
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
@@ -23,36 +25,48 @@ class CalendarEvent {
     private $uid;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(type="guid")
      */
     private $calendarUid;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=100)
      */
     private $title;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=500)
      */
     private $description;
 
     /**
+     * @var \DateTime
+     * @Assert\NotBlank()
      * @ORM\Column(type="date")
      */
     private $date;
 
     /**
+     * @var int
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $duration;
 
     /**
+     * @var \DateTime
      * @ORM\Column(type="date")
      */
     private $created;
 
     /**
+     * @var \DateTime
      * @ORM\Column(type="date")
      */
     private $updated;
@@ -100,10 +114,24 @@ class CalendarEvent {
     }
 
     /**
+     * @param string $calendarUid
+     */
+    public function setCalendarUid($calendarUid) {
+        $this->calendarUid = $calendarUid;
+    }
+
+    /**
      * @return string
      */
     public function getTitle() {
         return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title) {
+        $this->title = $title;
     }
 
     /**
@@ -114,10 +142,24 @@ class CalendarEvent {
     }
 
     /**
+     * @param string $description
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDate() {
         return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date) {
+        $this->date = $date;
     }
 
     /**
@@ -126,6 +168,13 @@ class CalendarEvent {
      */
     public function getDuration() {
         return $this->duration;
+    }
+
+    /**
+     * @param int $duration
+     */
+    public function setDuration($duration) {
+        $this->duration = $duration;
     }
 
     /**

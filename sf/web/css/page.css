@@ -12,6 +12,10 @@ body {
 	background-size: 100% 100%;
 }
 
+body h2 {
+	margin: 0;
+}
+
 .custom-calendar-full {
 	position: absolute;
 	top: 24px;
@@ -87,6 +91,12 @@ body {
 	user-select: none;
 }
 
+.custom-header #add-content nav {
+	position: absolute;
+	left: 320px;
+	top: 20px;
+}
+
 .custom-header nav span {
 	float: left;
 	width: 30px;
@@ -133,6 +143,10 @@ body {
 
 .custom-header nav span.custom-current:before {
 	content: '\1f554';
+}
+
+.custom-header nav span.custom-add:before {
+	content: '\2795';
 }
 
 

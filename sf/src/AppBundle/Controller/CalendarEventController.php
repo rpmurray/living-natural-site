@@ -1,11 +1,12 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Component\Type\CalendarEventFormType;
 use AppBundle\Entity\CalendarEvent;
 use AppBundle\Entity\User;
 use AppBundle\Util\Constants;
 use AppBundle\Util\Dates;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -20,26 +21,26 @@ class CalendarEventController extends Controller {
      *
      * @return Response
      */
-    public function getAction(Request $request) {
+    public function getListAction(Request $request) {
         // setup
         $doctrine = $this->getDoctrine();
         $em = $doctrine->getManager();
 
         // check login
-        //if (!($user = $this->validateLogin())) {
-        //    return $this->redirectLogin();
-        //}
+        $user = $this->validateLogin();
+        $isEditor = empty($user) ? false : $user->hasRole('ROLE_EDITOR');
 
         // read filters
         $dateFilter = $request->query->get('date');
         $dateFilter = empty($dateFilter) ? null : Dates::toDateTime($dateFilter);
 
         // fetch calendar events
+        /** @var EntityRepository $repository */
         $repository = $em->getRepository(CalendarEvent::class);
         if (!empty($dateFilter)) {
             $calendarEvents = $repository->findBy(array('date' => $dateFilter));
         } else {
-            $calendarEvents = $repository->findBy(array('calendarUid' => Constants::CLASS_CALENDAR_UID));
+            $calendarEvents = $repository->findBy(array('calendarUid' => Constants::CLASS_CALENDAR_UID), null, 1000, 0);
         }
 
         // populate results for response content
@@ -51,20 +52,13 @@ class CalendarEventController extends Controller {
                 $k = $tmp[count($tmp) - 1];
                 $row->$k = $v;
             }
-            $row->dateDisplay = Dates::toString($row->date, Dates::FORMAT_DISPLAY);
-            $row->dateJs = Dates::toString($row->date, Dates::FORMAT_JS);
-            $row->htmlLabel = str_replace("\n", "", $this->render(
-                ':calendarevent:label.html.twig', array('title' => $row->title)
-            )->getContent());
-            $row->htmlContent = str_replace("\n", "", $this->render(
-                ':calendarevent:content.html.twig',
-                array(
-                    'title'       => $row->title,
-                    'description' => $row->description,
-                    'date'        => Dates::toString($row->date, Dates::FORMAT_DISPLAY),
-                    'duration'    => $row->duration,
-                )
-            )->getContent());
+            $row->dateDisplay = Dates::toString($calendarEvent->getDate(), Dates::FORMAT_DISPLAY);
+            $row->dateJs = Dates::toString($calendarEvent->getDate(), Dates::FORMAT_JS);
+            $row->htmlLabel = $this->render(
+                ':calendarevent:label.html.twig',
+                array('title' => $calendarEvent->getTitle())
+            )->getContent();
+            $row->htmlContent = $this->getContent($calendarEvent)->getContent();
 
             $results[] = (array) $row;
         }
@@ -79,44 +73,97 @@ class CalendarEventController extends Controller {
     }
 
     /**
-     * @Route("/calendar/event")
-     * @Method("POST")
-     * @ParamConverter("postBody", class="array", converter="fos_rest.request_body")
+     * @Route("/calendar/event", name="create_calendar_event")
+     * @Method({"GET","POST"})
+     * @param Request $request
      *
      * @return Response
      */
-    public function addAction($postBody) {
-        // setup
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
-
+    public function addAction(Request $request) {
         // check login
         if (!($user = $this->validateLogin())) {
 //            return $this->redirectLogin();
         }
+        $isEditor = $user->hasRole('ROLE_EDITOR');
 
-        // generate calendar event
+        // create calendar event
         $calendarEvent = CalendarEvent::build(
             Constants::CLASS_CALENDAR_UID,
-            $postBody['title'],
-            $postBody['description'],
-            Dates::toDateTime($postBody['date']),
-            $postBody['duration'],
+            "Title",
+            "Description",
+            Dates::toDateTime(Dates::now()),
+            0,
             null,
             null
         );
 
+        // generate form
+        $form = $this->createForm('\AppBundle\Component\Type\CalendarEventFormType', $calendarEvent);
+
+        // handle request content
+        $isPost = $request->isMethod('POST');
+
+        if ($isPost) {
+            // process request
+            $form->handleRequest($request);
+//          $form->bind( $request );
+        }
+
+        // handle save or render form with errors
+        if ($isPost && $form->isSubmitted() && $form->isValid()) {
+            // fetch object from form
+            $calendarEvent = $form->getData();
+
+            // save calendar event
+            $this->save($calendarEvent);
+
+            // generate response
+            $response = $this->getContent($calendarEvent, $isEditor);
+        } else {
+            // render
+            $response = $this->render(
+                ':calendarevent:form.html.twig',
+                array(
+                    'form' => $form->createView(),
+                )
+            );
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param CalendarEvent $calendarEvent
+     */
+    private function save($calendarEvent) {
+        // setup
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+
         // persist
         $em->persist($calendarEvent);
         $em->flush();
+    }
 
-        // generate response
-        $serializer = $this->container->get('jms_serializer');
-        $content = $serializer->serialize($calendarEvent, 'json');
-        $response = new Response($content);
-        $response->headers->set('Content-Type', 'application/json');
+    /**
+     * @param CalendarEvent $calendarEvent
+     * @param bool          $showEditorActions
+     *
+     * @return Response
+     */
+    private function getContent(CalendarEvent $calendarEvent, $showEditorActions = false) {
+        $content = $this->render(
+            ':calendarevent:content.html.twig',
+            array(
+                'title' => $calendarEvent->getTitle(),
+                'description' => $calendarEvent->getDescription(),
+                'date' => Dates::toString($calendarEvent->getDate(), Dates::FORMAT_DISPLAY),
+                'duration' => $calendarEvent->getDuration(),
+                'showEditorActions' => $showEditorActions
+            )
+        );
 
-        return $response;
+        return $content;
     }
 
     /**

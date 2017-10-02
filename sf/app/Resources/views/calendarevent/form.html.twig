@@ -1,0 +1,28 @@
+<form name="{{ form.vars.full_name }}" action="{{ path('create_calendar_event') }}" method="post">
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var forms = [
+            '[ name="{{ form.vars.full_name }}"]'
+        ];
+
+        $(forms.join(',')).submit(function (e) {
+            e.preventDefault();
+
+            postForm($(this), function (response) {
+                eventFormFetchSuccess(response, null, null);
+            });
+
+            return false;
+        });
+    });
+</script>
+<!--
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+-->

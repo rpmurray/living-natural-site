@@ -1,4 +1,8 @@
 <div>{{ title }}</div>
 <div>{{ description }}</div>
-<div>{{ date }} {{ duration }}</div>
+<div>{{ date }} {% if duration > 0 %}for {{ duration }} minutes{% endif %}</div>
+{%  if showEditorActions %}
+<div><a href="#" onclick="showAddForm();">Add another event...</a></div>
+{% else %}
 <div><a href="#">Register</a></div>
+{% endif %}

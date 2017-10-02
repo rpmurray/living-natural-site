@@ -14,7 +14,7 @@ class Dates {
     const FORMAT_DATETIME = "Y-m-d\TH:i:sP";
     const FORMAT_DATE = "Y-m-d";
     const FORMAT_TIME = "\TH:i:sP";
-    const FORMAT_DISPLAY = "M d, Y H:i:s A";
+    const FORMAT_DISPLAY = "M d, Y h:i A";
     const FORMAT_JS = "m-d-Y";
 
     /**

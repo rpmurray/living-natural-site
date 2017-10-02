@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         if (!$request->query->get('demo')) {
-            //return $this->redirect('/wp');
+            return $this->redirect('/wp');
         }
 
         // replace this example code with whatever you need
