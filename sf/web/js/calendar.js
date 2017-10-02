@@ -52,6 +52,9 @@ $(function () {
         for (var uid in calEvents) {
             htmlContent += calEvents[uid].htmlContent;
         }
+        if (htmlContent === '') {
+            return;
+        }
 
         // set html content
         $('#calendar-day-details-content').html(htmlContent);

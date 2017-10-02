@@ -1,5 +1,5 @@
 parameters:
-    database_host: 127.0.0.1
+    database_host: localhost
     database_port: 3306
     database_name: livingnatural
     database_user: livingnatural_admin

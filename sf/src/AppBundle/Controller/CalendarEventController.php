@@ -26,9 +26,9 @@ class CalendarEventController extends Controller {
         $em = $doctrine->getManager();
 
         // check login
-        if (!($user = $this->validateLogin())) {
-            return $this->redirectLogin();
-        }
+        //if (!($user = $this->validateLogin())) {
+        //    return $this->redirectLogin();
+        //}
 
         // read filters
         $dateFilter = $request->query->get('date');
